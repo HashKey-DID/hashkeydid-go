@@ -118,12 +118,18 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 				return "", err
 			}
 			tokenURI, err = nft721.TokenURI(opts, tokenId)
+			if err != nil {
+				return "", err
+			}
 		case "1155":
 			nft1155, err := erc1155.NewContract(common.HexToAddress(texts[3]), client)
 			if err != nil {
 				return "", err
 			}
 			tokenURI, err = nft1155.Uri(opts, tokenId)
+			if err != nil {
+				return "", err
+			}
 		default:
 			return "", ErrInvalidAvatarText
 		}
