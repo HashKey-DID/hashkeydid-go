@@ -87,7 +87,7 @@ func (c *Core) GetAvatarByTokenId(opts *bind.CallOpts, tokenId uint64, chainList
 	return avatarFormatText2AvatarUrl(opts, avatarText, chainList)
 }
 
-// avatarFormatText2AvatarUrl convert
+// avatarFormatText2AvatarUrl convert avatar format text in resolver to an image url
 func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainList map[string]*ChainInfo) (string, error) {
 	texts := strings.Split(formatText, ":")
 	if len(texts) < 2 {
@@ -152,6 +152,7 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 	}
 }
 
+// getImageFromTokenURI parses tokenURI's info to get the image url
 func getImageFromTokenURI(tokenURI string) string {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", fmt.Sprintf(tokenURI), bytes.NewReader([]byte{}))
