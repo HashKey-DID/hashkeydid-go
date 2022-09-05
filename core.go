@@ -5,6 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+
 	"github.com/hashkeydid-go/contracts/did"
 	"github.com/hashkeydid-go/contracts/resolver"
 )
