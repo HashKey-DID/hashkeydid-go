@@ -1,4 +1,4 @@
-module github.com/hashkey-did/hashkeydid-go
+module github.com/hashkeydid/hashkeydid-go
 
 go 1.18
 

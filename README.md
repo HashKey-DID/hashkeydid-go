@@ -1,12 +1,12 @@
 # HashKey DID Go SDK
-[![Tag](https://img.shields.io/badge/tags-v0.0.1-blue)](https://github.com/HashKey-DID/hashkeydid-go/tags)
+[![Tag](https://img.shields.io/badge/tags-v0.0.1-blue)](https://github.com/hashkeydid/hashkeydid-go/tags)
 [![License](https://img.shields.io/badge/tags-MIT-yellow)](LICENSE)
 
 Go module to work with HashKey DID Protocol.
 
 ## Installation
 
-`go get github.com/hashkey-did/hashkeydid-go`
+`go get github.com/hashkeydid/hashkeydid-go`
 
 ## Usage
 
@@ -44,7 +44,7 @@ name, err := core.GetDIDNameByAddrForce(opts, address)
 In [HashKey DID](https://hashkey.id), `avatarUrl` supports many forms ([Detail]()).
 
 `chainList` is a map which includes information of chains.
-SDK provides [a default chainList](https://github.com/HashKey-DID/hashkeydid-go/blob/main/default.go) for user to query on-chain status.
+SDK provides [a default chainList](https://github.com/hashkeydid/hashkeydid-go/blob/main/default.go) for user to query on-chain status.
 User can provide a list with custom chainIds and RPCUrls.
 
 `chainList` in args can be nil.

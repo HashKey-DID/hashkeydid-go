@@ -6,8 +6,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	"github.com/hashkey-did/hashkeydid-go/contracts/did"
-	"github.com/hashkey-did/hashkeydid-go/contracts/resolver"
+	"github.com/hashkeydid/hashkeydid-go/contracts/did"
+	"github.com/hashkeydid/hashkeydid-go/contracts/resolver"
 )
 
 // Core is structure for basic interaction with contracts
