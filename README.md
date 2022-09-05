@@ -6,7 +6,7 @@ Go module to work with HashKey DID Protocol.
 
 ## Installation
 
-`go get github.com/hashkeydid-go`
+`go get github.com/hashkey-did/hashkeydid-go`
 
 ## Usage
 

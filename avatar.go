@@ -13,8 +13,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	"github.com/hashkeydid-go/contracts/erc1155"
-	"github.com/hashkeydid-go/contracts/erc721"
+	"github.com/hashkey-did/hashkeydid-go/contracts/erc1155"
+	"github.com/hashkey-did/hashkeydid-go/contracts/erc721"
 )
 
 // GetMetadataAvatarByDIDName returns the image url in metadata queried by did name
