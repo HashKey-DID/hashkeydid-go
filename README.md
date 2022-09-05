@@ -1,10 +1,12 @@
 # HashKey DID Go SDK
+[![Tag](https://img.shields.io/badge/tags-v0.0.1-blue)](https://github.com/HashKey-DID/hashkeydid-go/tags)
+[![License](https://img.shields.io/badge/tags-MIT-yellow)](LICENSE)
 
 Go module to work with HashKey DID Protocol.
 
 ## Installation
 
-`go get github.com/HashKey-DID/hashkeydid-go`
+`go get github.com/hashkeydid-go`
 
 ## Usage
 
