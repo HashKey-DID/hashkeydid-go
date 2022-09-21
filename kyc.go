@@ -15,6 +15,7 @@ type KYCInfo struct {
 	ExpireTime *big.Int
 }
 
+// AddKYC add KYC information for specific token id
 func (c *Core) AddKYC(opts *bind.TransactOpts, tokenId uint64, KYCProvider common.Address, KYCId uint64, status bool, updateTime uint64, expireTime uint64, evidence []byte) (*types.Transaction, error) {
 	totalSupply, err := c.did.TotalSupply(nil)
 	if err != nil {
@@ -32,6 +33,7 @@ func (c *Core) AddKYC(opts *bind.TransactOpts, tokenId uint64, KYCProvider commo
 	return c.did.AddKYC(opts, new(big.Int).SetUint64(tokenId), KYCProvider, new(big.Int).SetUint64(KYCId), status, new(big.Int).SetUint64(updateTime), new(big.Int).SetUint64(expireTime), evidence)
 }
 
+// GetKYCInfo returns the KYC information for specific token id from DID
 func (c *Core) GetKYCInfo(opts *bind.CallOpts, tokenId uint64, KYCProvider common.Address, KYCId uint64) (*KYCInfo, error) {
 	totalSupply, err := c.did.TotalSupply(nil)
 	if err != nil {
