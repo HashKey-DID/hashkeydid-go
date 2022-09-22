@@ -1,5 +1,6 @@
 # HashKey DID Go SDK
 [![Tag](https://img.shields.io/badge/tags-v0.0.3-blue)](https://github.com/hashkeydid/hashkeydid-go/tags)
+[![Go Reference](https://pkg.go.dev/badge/github.com/hashkeydid/hashkeydid-go.svg)](https://pkg.go.dev/github.com/hashkeydid/hashkeydid-go)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hashkeydid/hashkeydid-go)](https://goreportcard.com/report/github.com/hashkeydid/hashkeydid-go)
 
