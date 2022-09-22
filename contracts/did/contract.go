@@ -4,6 +4,7 @@
 package did
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -26,8 +28,14 @@ var (
 	_ = event.NewSubscription
 )
 
+// ContractMetaData contains all meta data concerning the Contract contract.
+var ContractMetaData = &bind.MetaData{
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"AddAuth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"AddKYC\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Claim\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"IssueDG\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"IssueNFT\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"RemoveAuth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addAuth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"addKYC\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrClaimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"baseURI_\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"claimDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"NFTAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sid\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"claimDGNFT\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"deedGrainAddrToIssuer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dgFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dgMinter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"did2TokenId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"didClaimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"didMinter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getAuthorizedAddrs\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"}],\"name\":\"getKYCInfo\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_baseTokenURI\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isAddrAuthorized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_baseUri\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"_evidence\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_transferable\",\"type\":\"bool\"}],\"name\":\"issueDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_baseUri\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"_evidence\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"_supply\",\"type\":\"uint256\"}],\"name\":\"issueNFT\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"addrs\",\"type\":\"address[]\"}],\"name\":\"mintDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"NFTAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sid\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"addrs\",\"type\":\"address[]\"}],\"name\":\"mintDGNFT\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeAuth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"setDGFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"setDGMinterAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"setDidMinterAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"NFTAddr\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"baseUri\",\"type\":\"string\"}],\"name\":\"setNFTBaseUri\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"NFTAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"supply\",\"type\":\"uint256\"}],\"name\":\"setNFTSupply\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer_\",\"type\":\"address\"}],\"name\":\"setSigner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"baseUri\",\"type\":\"string\"}],\"name\":\"setTokenBaseUri\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"supply\",\"type\":\"uint256\"}],\"name\":\"setTokenSupply\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"signer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tokenId2Did\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"verifyDIDFormat\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]",
+}
+
 // ContractABI is the input ABI used to generate the binding from.
-const ContractABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"AddAuth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"AddKYC\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Claim\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"IssueDG\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"RemoveAuth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addAuth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"addKYC\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrClaimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"baseURI_\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"evidence\",\"type\":\"bytes\"}],\"name\":\"claimDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"deedGrainAddrToIssur\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dgMinter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"did2TokenId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"didClaimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"didMinter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getAuthorizedAddrs\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"KYCProvider\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"KYCId\",\"type\":\"uint256\"}],\"name\":\"getKYCInfo\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_baseTokenURI\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isAddrAuthorized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_baseUri\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"_evidence\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_transferable\",\"type\":\"bool\"}],\"name\":\"issueDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"addrs\",\"type\":\"address[]\"}],\"name\":\"mintDG\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeAuth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"setDGMinterAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"setDidMinterAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"setSigner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"baseUri\",\"type\":\"string\"}],\"name\":\"setTokenBaseUri\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DGAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"supply\",\"type\":\"uint256\"}],\"name\":\"setTokenSupply\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"signer_\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tokenId2Did\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"did\",\"type\":\"string\"}],\"name\":\"verifyDIDFormat\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]"
+// Deprecated: Use ContractMetaData.ABI instead.
+var ContractABI = ContractMetaData.ABI
 
 // Contract is an auto generated Go binding around an Ethereum contract.
 type Contract struct {
@@ -264,12 +272,12 @@ func (_Contract *ContractCallerSession) BaseURI() (string, error) {
 	return _Contract.Contract.BaseURI(&_Contract.CallOpts)
 }
 
-// DeedGrainAddrToIssur is a free data retrieval call binding the contract method 0x4e7bacdf.
+// DeedGrainAddrToIssuer is a free data retrieval call binding the contract method 0x4f9a1c8c.
 //
-// Solidity: function deedGrainAddrToIssur(address ) view returns(address)
-func (_Contract *ContractCaller) DeedGrainAddrToIssur(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
+// Solidity: function deedGrainAddrToIssuer(address ) view returns(address)
+func (_Contract *ContractCaller) DeedGrainAddrToIssuer(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "deedGrainAddrToIssur", arg0)
+	err := _Contract.contract.Call(opts, &out, "deedGrainAddrToIssuer", arg0)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -281,18 +289,49 @@ func (_Contract *ContractCaller) DeedGrainAddrToIssur(opts *bind.CallOpts, arg0 
 
 }
 
-// DeedGrainAddrToIssur is a free data retrieval call binding the contract method 0x4e7bacdf.
+// DeedGrainAddrToIssuer is a free data retrieval call binding the contract method 0x4f9a1c8c.
 //
-// Solidity: function deedGrainAddrToIssur(address ) view returns(address)
-func (_Contract *ContractSession) DeedGrainAddrToIssur(arg0 common.Address) (common.Address, error) {
-	return _Contract.Contract.DeedGrainAddrToIssur(&_Contract.CallOpts, arg0)
+// Solidity: function deedGrainAddrToIssuer(address ) view returns(address)
+func (_Contract *ContractSession) DeedGrainAddrToIssuer(arg0 common.Address) (common.Address, error) {
+	return _Contract.Contract.DeedGrainAddrToIssuer(&_Contract.CallOpts, arg0)
 }
 
-// DeedGrainAddrToIssur is a free data retrieval call binding the contract method 0x4e7bacdf.
+// DeedGrainAddrToIssuer is a free data retrieval call binding the contract method 0x4f9a1c8c.
 //
-// Solidity: function deedGrainAddrToIssur(address ) view returns(address)
-func (_Contract *ContractCallerSession) DeedGrainAddrToIssur(arg0 common.Address) (common.Address, error) {
-	return _Contract.Contract.DeedGrainAddrToIssur(&_Contract.CallOpts, arg0)
+// Solidity: function deedGrainAddrToIssuer(address ) view returns(address)
+func (_Contract *ContractCallerSession) DeedGrainAddrToIssuer(arg0 common.Address) (common.Address, error) {
+	return _Contract.Contract.DeedGrainAddrToIssuer(&_Contract.CallOpts, arg0)
+}
+
+// DgFactory is a free data retrieval call binding the contract method 0x03919352.
+//
+// Solidity: function dgFactory() view returns(address)
+func (_Contract *ContractCaller) DgFactory(opts *bind.CallOpts) (common.Address, error) {
+	var out []interface{}
+	err := _Contract.contract.Call(opts, &out, "dgFactory")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// DgFactory is a free data retrieval call binding the contract method 0x03919352.
+//
+// Solidity: function dgFactory() view returns(address)
+func (_Contract *ContractSession) DgFactory() (common.Address, error) {
+	return _Contract.Contract.DgFactory(&_Contract.CallOpts)
+}
+
+// DgFactory is a free data retrieval call binding the contract method 0x03919352.
+//
+// Solidity: function dgFactory() view returns(address)
+func (_Contract *ContractCallerSession) DgFactory() (common.Address, error) {
+	return _Contract.Contract.DgFactory(&_Contract.CallOpts)
 }
 
 // DgMinter is a free data retrieval call binding the contract method 0xaf457dde.
@@ -669,12 +708,12 @@ func (_Contract *ContractCallerSession) OwnerOf(tokenId *big.Int) (common.Addres
 	return _Contract.Contract.OwnerOf(&_Contract.CallOpts, tokenId)
 }
 
-// Signer is a free data retrieval call binding the contract method 0x4e1f65b4.
+// Signer is a free data retrieval call binding the contract method 0x238ac933.
 //
-// Solidity: function signer_() view returns(address)
+// Solidity: function signer() view returns(address)
 func (_Contract *ContractCaller) Signer(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "signer_")
+	err := _Contract.contract.Call(opts, &out, "signer")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -686,16 +725,16 @@ func (_Contract *ContractCaller) Signer(opts *bind.CallOpts) (common.Address, er
 
 }
 
-// Signer is a free data retrieval call binding the contract method 0x4e1f65b4.
+// Signer is a free data retrieval call binding the contract method 0x238ac933.
 //
-// Solidity: function signer_() view returns(address)
+// Solidity: function signer() view returns(address)
 func (_Contract *ContractSession) Signer() (common.Address, error) {
 	return _Contract.Contract.Signer(&_Contract.CallOpts)
 }
 
-// Signer is a free data retrieval call binding the contract method 0x4e1f65b4.
+// Signer is a free data retrieval call binding the contract method 0x238ac933.
 //
-// Solidity: function signer_() view returns(address)
+// Solidity: function signer() view returns(address)
 func (_Contract *ContractCallerSession) Signer() (common.Address, error) {
 	return _Contract.Contract.Signer(&_Contract.CallOpts)
 }
@@ -1053,6 +1092,27 @@ func (_Contract *ContractTransactorSession) ClaimDG(DGAddr common.Address, token
 	return _Contract.Contract.ClaimDG(&_Contract.TransactOpts, DGAddr, tokenId, evidence)
 }
 
+// ClaimDGNFT is a paid mutator transaction binding the contract method 0x79c3919f.
+//
+// Solidity: function claimDGNFT(address NFTAddr, uint256 sid, bytes evidence) returns()
+func (_Contract *ContractTransactor) ClaimDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid *big.Int, evidence []byte) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "claimDGNFT", NFTAddr, sid, evidence)
+}
+
+// ClaimDGNFT is a paid mutator transaction binding the contract method 0x79c3919f.
+//
+// Solidity: function claimDGNFT(address NFTAddr, uint256 sid, bytes evidence) returns()
+func (_Contract *ContractSession) ClaimDGNFT(NFTAddr common.Address, sid *big.Int, evidence []byte) (*types.Transaction, error) {
+	return _Contract.Contract.ClaimDGNFT(&_Contract.TransactOpts, NFTAddr, sid, evidence)
+}
+
+// ClaimDGNFT is a paid mutator transaction binding the contract method 0x79c3919f.
+//
+// Solidity: function claimDGNFT(address NFTAddr, uint256 sid, bytes evidence) returns()
+func (_Contract *ContractTransactorSession) ClaimDGNFT(NFTAddr common.Address, sid *big.Int, evidence []byte) (*types.Transaction, error) {
+	return _Contract.Contract.ClaimDGNFT(&_Contract.TransactOpts, NFTAddr, sid, evidence)
+}
+
 // Initialize is a paid mutator transaction binding the contract method 0x5c6d8da1.
 //
 // Solidity: function initialize(string _name, string _symbol, string _baseTokenURI, address _owner) returns()
@@ -1095,6 +1155,27 @@ func (_Contract *ContractTransactorSession) IssueDG(_name string, _symbol string
 	return _Contract.Contract.IssueDG(&_Contract.TransactOpts, _name, _symbol, _baseUri, _evidence, _transferable)
 }
 
+// IssueNFT is a paid mutator transaction binding the contract method 0xe4b8f11f.
+//
+// Solidity: function issueNFT(string _name, string _symbol, string _baseUri, bytes _evidence, uint256 _supply) returns()
+func (_Contract *ContractTransactor) IssueNFT(opts *bind.TransactOpts, _name string, _symbol string, _baseUri string, _evidence []byte, _supply *big.Int) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "issueNFT", _name, _symbol, _baseUri, _evidence, _supply)
+}
+
+// IssueNFT is a paid mutator transaction binding the contract method 0xe4b8f11f.
+//
+// Solidity: function issueNFT(string _name, string _symbol, string _baseUri, bytes _evidence, uint256 _supply) returns()
+func (_Contract *ContractSession) IssueNFT(_name string, _symbol string, _baseUri string, _evidence []byte, _supply *big.Int) (*types.Transaction, error) {
+	return _Contract.Contract.IssueNFT(&_Contract.TransactOpts, _name, _symbol, _baseUri, _evidence, _supply)
+}
+
+// IssueNFT is a paid mutator transaction binding the contract method 0xe4b8f11f.
+//
+// Solidity: function issueNFT(string _name, string _symbol, string _baseUri, bytes _evidence, uint256 _supply) returns()
+func (_Contract *ContractTransactorSession) IssueNFT(_name string, _symbol string, _baseUri string, _evidence []byte, _supply *big.Int) (*types.Transaction, error) {
+	return _Contract.Contract.IssueNFT(&_Contract.TransactOpts, _name, _symbol, _baseUri, _evidence, _supply)
+}
+
 // Mint is a paid mutator transaction binding the contract method 0xd0def521.
 //
 // Solidity: function mint(address to, string did) returns()
@@ -1135,6 +1216,27 @@ func (_Contract *ContractSession) MintDG(DGAddr common.Address, tokenId *big.Int
 // Solidity: function mintDG(address DGAddr, uint256 tokenId, address[] addrs) returns()
 func (_Contract *ContractTransactorSession) MintDG(DGAddr common.Address, tokenId *big.Int, addrs []common.Address) (*types.Transaction, error) {
 	return _Contract.Contract.MintDG(&_Contract.TransactOpts, DGAddr, tokenId, addrs)
+}
+
+// MintDGNFT is a paid mutator transaction binding the contract method 0x258bd726.
+//
+// Solidity: function mintDGNFT(address NFTAddr, uint256 sid, address[] addrs) returns()
+func (_Contract *ContractTransactor) MintDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid *big.Int, addrs []common.Address) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "mintDGNFT", NFTAddr, sid, addrs)
+}
+
+// MintDGNFT is a paid mutator transaction binding the contract method 0x258bd726.
+//
+// Solidity: function mintDGNFT(address NFTAddr, uint256 sid, address[] addrs) returns()
+func (_Contract *ContractSession) MintDGNFT(NFTAddr common.Address, sid *big.Int, addrs []common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.MintDGNFT(&_Contract.TransactOpts, NFTAddr, sid, addrs)
+}
+
+// MintDGNFT is a paid mutator transaction binding the contract method 0x258bd726.
+//
+// Solidity: function mintDGNFT(address NFTAddr, uint256 sid, address[] addrs) returns()
+func (_Contract *ContractTransactorSession) MintDGNFT(NFTAddr common.Address, sid *big.Int, addrs []common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.MintDGNFT(&_Contract.TransactOpts, NFTAddr, sid, addrs)
 }
 
 // RemoveAuth is a paid mutator transaction binding the contract method 0x467034df.
@@ -1221,6 +1323,27 @@ func (_Contract *ContractTransactorSession) SetApprovalForAll(operator common.Ad
 	return _Contract.Contract.SetApprovalForAll(&_Contract.TransactOpts, operator, approved)
 }
 
+// SetDGFactory is a paid mutator transaction binding the contract method 0x381c5336.
+//
+// Solidity: function setDGFactory(address factory) returns()
+func (_Contract *ContractTransactor) SetDGFactory(opts *bind.TransactOpts, factory common.Address) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "setDGFactory", factory)
+}
+
+// SetDGFactory is a paid mutator transaction binding the contract method 0x381c5336.
+//
+// Solidity: function setDGFactory(address factory) returns()
+func (_Contract *ContractSession) SetDGFactory(factory common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.SetDGFactory(&_Contract.TransactOpts, factory)
+}
+
+// SetDGFactory is a paid mutator transaction binding the contract method 0x381c5336.
+//
+// Solidity: function setDGFactory(address factory) returns()
+func (_Contract *ContractTransactorSession) SetDGFactory(factory common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.SetDGFactory(&_Contract.TransactOpts, factory)
+}
+
 // SetDGMinterAddr is a paid mutator transaction binding the contract method 0x03a19ae4.
 //
 // Solidity: function setDGMinterAddr(address minter) returns()
@@ -1263,25 +1386,67 @@ func (_Contract *ContractTransactorSession) SetDidMinterAddr(minter common.Addre
 	return _Contract.Contract.SetDidMinterAddr(&_Contract.TransactOpts, minter)
 }
 
-// SetSigner is a paid mutator transaction binding the contract method 0x6c19e783.
+// SetNFTBaseUri is a paid mutator transaction binding the contract method 0xa135b302.
 //
-// Solidity: function setSigner(address signer) returns()
-func (_Contract *ContractTransactor) SetSigner(opts *bind.TransactOpts, signer common.Address) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "setSigner", signer)
+// Solidity: function setNFTBaseUri(address NFTAddr, string baseUri) returns()
+func (_Contract *ContractTransactor) SetNFTBaseUri(opts *bind.TransactOpts, NFTAddr common.Address, baseUri string) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "setNFTBaseUri", NFTAddr, baseUri)
+}
+
+// SetNFTBaseUri is a paid mutator transaction binding the contract method 0xa135b302.
+//
+// Solidity: function setNFTBaseUri(address NFTAddr, string baseUri) returns()
+func (_Contract *ContractSession) SetNFTBaseUri(NFTAddr common.Address, baseUri string) (*types.Transaction, error) {
+	return _Contract.Contract.SetNFTBaseUri(&_Contract.TransactOpts, NFTAddr, baseUri)
+}
+
+// SetNFTBaseUri is a paid mutator transaction binding the contract method 0xa135b302.
+//
+// Solidity: function setNFTBaseUri(address NFTAddr, string baseUri) returns()
+func (_Contract *ContractTransactorSession) SetNFTBaseUri(NFTAddr common.Address, baseUri string) (*types.Transaction, error) {
+	return _Contract.Contract.SetNFTBaseUri(&_Contract.TransactOpts, NFTAddr, baseUri)
+}
+
+// SetNFTSupply is a paid mutator transaction binding the contract method 0x7a9e526b.
+//
+// Solidity: function setNFTSupply(address NFTAddr, uint256 supply) returns()
+func (_Contract *ContractTransactor) SetNFTSupply(opts *bind.TransactOpts, NFTAddr common.Address, supply *big.Int) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "setNFTSupply", NFTAddr, supply)
+}
+
+// SetNFTSupply is a paid mutator transaction binding the contract method 0x7a9e526b.
+//
+// Solidity: function setNFTSupply(address NFTAddr, uint256 supply) returns()
+func (_Contract *ContractSession) SetNFTSupply(NFTAddr common.Address, supply *big.Int) (*types.Transaction, error) {
+	return _Contract.Contract.SetNFTSupply(&_Contract.TransactOpts, NFTAddr, supply)
+}
+
+// SetNFTSupply is a paid mutator transaction binding the contract method 0x7a9e526b.
+//
+// Solidity: function setNFTSupply(address NFTAddr, uint256 supply) returns()
+func (_Contract *ContractTransactorSession) SetNFTSupply(NFTAddr common.Address, supply *big.Int) (*types.Transaction, error) {
+	return _Contract.Contract.SetNFTSupply(&_Contract.TransactOpts, NFTAddr, supply)
 }
 
 // SetSigner is a paid mutator transaction binding the contract method 0x6c19e783.
 //
-// Solidity: function setSigner(address signer) returns()
-func (_Contract *ContractSession) SetSigner(signer common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.SetSigner(&_Contract.TransactOpts, signer)
+// Solidity: function setSigner(address signer_) returns()
+func (_Contract *ContractTransactor) SetSigner(opts *bind.TransactOpts, signer_ common.Address) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "setSigner", signer_)
 }
 
 // SetSigner is a paid mutator transaction binding the contract method 0x6c19e783.
 //
-// Solidity: function setSigner(address signer) returns()
-func (_Contract *ContractTransactorSession) SetSigner(signer common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.SetSigner(&_Contract.TransactOpts, signer)
+// Solidity: function setSigner(address signer_) returns()
+func (_Contract *ContractSession) SetSigner(signer_ common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.SetSigner(&_Contract.TransactOpts, signer_)
+}
+
+// SetSigner is a paid mutator transaction binding the contract method 0x6c19e783.
+//
+// Solidity: function setSigner(address signer_) returns()
+func (_Contract *ContractTransactorSession) SetSigner(signer_ common.Address) (*types.Transaction, error) {
+	return _Contract.Contract.SetSigner(&_Contract.TransactOpts, signer_)
 }
 
 // SetTokenBaseUri is a paid mutator transaction binding the contract method 0xc3535aaa.
@@ -1518,6 +1683,7 @@ func (_Contract *ContractFilterer) ParseAddAuth(log types.Log) (*ContractAddAuth
 	if err := _Contract.contract.UnpackLog(event, "AddAuth", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1657,6 +1823,7 @@ func (_Contract *ContractFilterer) ParseAddKYC(log types.Log) (*ContractAddKYC, 
 	if err := _Contract.contract.UnpackLog(event, "AddKYC", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1818,6 +1985,7 @@ func (_Contract *ContractFilterer) ParseApproval(log types.Log) (*ContractApprov
 	if err := _Contract.contract.UnpackLog(event, "Approval", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1971,6 +2139,7 @@ func (_Contract *ContractFilterer) ParseApprovalForAll(log types.Log) (*Contract
 	if err := _Contract.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2126,6 +2295,7 @@ func (_Contract *ContractFilterer) ParseClaim(log types.Log) (*ContractClaim, er
 	if err := _Contract.contract.UnpackLog(event, "Claim", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2259,6 +2429,7 @@ func (_Contract *ContractFilterer) ParseInitialized(log types.Log) (*ContractIni
 	if err := _Contract.contract.UnpackLog(event, "Initialized", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2403,6 +2574,152 @@ func (_Contract *ContractFilterer) ParseIssueDG(log types.Log) (*ContractIssueDG
 	if err := _Contract.contract.UnpackLog(event, "IssueDG", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
+	return event, nil
+}
+
+// ContractIssueNFTIterator is returned from FilterIssueNFT and is used to iterate over the raw logs and unpacked data for IssueNFT events raised by the Contract contract.
+type ContractIssueNFTIterator struct {
+	Event *ContractIssueNFT // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ContractIssueNFTIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ContractIssueNFT)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ContractIssueNFT)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ContractIssueNFTIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ContractIssueNFTIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ContractIssueNFT represents a IssueNFT event raised by the Contract contract.
+type ContractIssueNFT struct {
+	Arg0 common.Address
+	Arg1 common.Address
+	Raw  types.Log // Blockchain specific contextual infos
+}
+
+// FilterIssueNFT is a free log retrieval operation binding the contract event 0xf9d4b55952c081f85101e9a2f8c6d5843afd8c96692b343ae78aa9f653090c39.
+//
+// Solidity: event IssueNFT(address indexed arg0, address arg1)
+func (_Contract *ContractFilterer) FilterIssueNFT(opts *bind.FilterOpts, arg0 []common.Address) (*ContractIssueNFTIterator, error) {
+
+	var arg0Rule []interface{}
+	for _, arg0Item := range arg0 {
+		arg0Rule = append(arg0Rule, arg0Item)
+	}
+
+	logs, sub, err := _Contract.contract.FilterLogs(opts, "IssueNFT", arg0Rule)
+	if err != nil {
+		return nil, err
+	}
+	return &ContractIssueNFTIterator{contract: _Contract.contract, event: "IssueNFT", logs: logs, sub: sub}, nil
+}
+
+// WatchIssueNFT is a free log subscription operation binding the contract event 0xf9d4b55952c081f85101e9a2f8c6d5843afd8c96692b343ae78aa9f653090c39.
+//
+// Solidity: event IssueNFT(address indexed arg0, address arg1)
+func (_Contract *ContractFilterer) WatchIssueNFT(opts *bind.WatchOpts, sink chan<- *ContractIssueNFT, arg0 []common.Address) (event.Subscription, error) {
+
+	var arg0Rule []interface{}
+	for _, arg0Item := range arg0 {
+		arg0Rule = append(arg0Rule, arg0Item)
+	}
+
+	logs, sub, err := _Contract.contract.WatchLogs(opts, "IssueNFT", arg0Rule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ContractIssueNFT)
+				if err := _Contract.contract.UnpackLog(event, "IssueNFT", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseIssueNFT is a log parse operation binding the contract event 0xf9d4b55952c081f85101e9a2f8c6d5843afd8c96692b343ae78aa9f653090c39.
+//
+// Solidity: event IssueNFT(address indexed arg0, address arg1)
+func (_Contract *ContractFilterer) ParseIssueNFT(log types.Log) (*ContractIssueNFT, error) {
+	event := new(ContractIssueNFT)
+	if err := _Contract.contract.UnpackLog(event, "IssueNFT", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2537,6 +2854,7 @@ func (_Contract *ContractFilterer) ParseOwnerChanged(log types.Log) (*ContractOw
 	if err := _Contract.contract.UnpackLog(event, "OwnerChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2690,6 +3008,7 @@ func (_Contract *ContractFilterer) ParseRemoveAuth(log types.Log) (*ContractRemo
 	if err := _Contract.contract.UnpackLog(event, "RemoveAuth", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2851,5 +3170,6 @@ func (_Contract *ContractFilterer) ParseTransfer(log types.Log) (*ContractTransf
 	if err := _Contract.contract.UnpackLog(event, "Transfer", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
