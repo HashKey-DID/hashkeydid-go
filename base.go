@@ -8,19 +8,29 @@ import (
 )
 
 // GetTokenIdByDid returns DID's tokenId by name
-func (c *Core) GetTokenIdByDid(opts *bind.CallOpts, didName string) (int64, error) {
+func (c *Core) GetTokenIdByDid(opts *bind.CallOpts, didName string) (string, error) {
 	tokenId, err := c.did.Did2TokenId(opts, didName)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
-	return tokenId.Int64(), nil
+	if tokenId != nil && tokenId.Int64() == 0 {
+		return "", ErrDidNotClaimed
+	}
+	return tokenId.String(), nil
 }
 
 // GetDidByTokenId returns DID's name by tokenId
-func (c *Core) GetDidByTokenId(opts *bind.CallOpts, tokenId int64) (string, error) {
-	didName, err := c.did.TokenId2Did(opts, big.NewInt(tokenId))
+func (c *Core) GetDidByTokenId(opts *bind.CallOpts, tokenId string) (string, error) {
+	id, ok := new(big.Int).SetString(tokenId, 10)
+	if !ok {
+		return "", ErrInvalidTokenId
+	}
+	didName, err := c.did.TokenId2Did(opts, id)
 	if err != nil {
 		return "", err
+	}
+	if didName == "" {
+		return "", ErrInvalidTokenId
 	}
 	return didName, nil
 }
@@ -29,20 +39,20 @@ func (c *Core) GetDidByTokenId(opts *bind.CallOpts, tokenId int64) (string, erro
 func (c *Core) GetAddrByDIDName(opts *bind.CallOpts, didName string) (common.Address, error) {
 	tokenId, err := c.GetTokenIdByDid(opts, didName)
 	if err != nil {
-		return common.HexToAddress("0"), err
+		return common.Address{}, err
 	}
-	addr, err := c.did.OwnerOf(opts, big.NewInt(tokenId))
-	if err != nil {
-		return common.HexToAddress("0"), err
+	id, ok := new(big.Int).SetString(tokenId, 10)
+	if !ok {
+		return common.Address{}, ErrInvalidTokenId
 	}
-	return addr, nil
+	return c.did.OwnerOf(opts, id)
 }
 
 // GetBlockChainAddress returns DID's binding addresses according to coinType
-func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId, coinType int64) ([]byte, error){
-	addr, err := c.resolver.Addr(opts, big.NewInt(tokenId), big.NewInt(coinType))
-	if err != nil {
-		return addr, err
+func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId string, coinType int64) ([]byte, error) {
+	id, ok := new(big.Int).SetString(tokenId, 10)
+	if !ok {
+		return []byte{}, ErrInvalidTokenId
 	}
-	return addr, nil
+	return c.resolver.Addr(opts, id, big.NewInt(coinType))
 }
