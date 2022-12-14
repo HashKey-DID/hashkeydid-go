@@ -40,7 +40,7 @@ func (c *Core) GetAddrByDIDName(opts *bind.CallOpts, didName string) (common.Add
 
 // GetBlockChainAddress returns DID's binding addresses according to coinType
 func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId, coinType int64) ([]byte, error){
-	addr,err := c.resolver.Addr(opts, big.NewInt(tokenId), big.NewInt(coinType))
+	addr, err := c.resolver.Addr(opts, big.NewInt(tokenId), big.NewInt(coinType))
 	if err != nil {
 		return addr, err
 	}
