@@ -1,7 +1,7 @@
 package hashkeydid_go
 
 import (
-	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -146,7 +146,7 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 		if len(texts) != 2 {
 			return "", ErrInvalidAvatarText
 		}
-		return fmt.Sprintf("%s://%s", texts[0], texts[1]), nil
+		return fmt.Sprintf("%s:%s", texts[0], texts[1]), nil
 	default:
 		return "", ErrInvalidAvatarText
 	}
@@ -154,15 +154,19 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 
 // getImageFromTokenURI parses tokenURI's info to get the image url
 func getImageFromTokenURI(tokenURI string) string {
-	client := &http.Client{}
-	req, err := http.NewRequest("GET", fmt.Sprintf(tokenURI), bytes.NewReader([]byte{}))
+	client := http.Client {
+		Transport: &http.Transport {
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+	request, _ := http.NewRequest("GET", tokenURI, nil)
+	res, err := client.Do(request)
 	if err != nil {
 		return ""
 	}
-	res, err := client.Do(req)
-	if err != nil {
-		return ""
-	}
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return ""
