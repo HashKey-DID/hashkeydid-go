@@ -33,3 +33,33 @@ func (c *Core) SetTokenSupply(opts *bind.TransactOpts, DGAddr common.Address, to
 func (c *Core) SetNFTSupply(opts *bind.TransactOpts, NFTAddr common.Address, supply uint64) (*types.Transaction, error) {
 	return c.did.SetNFTSupply(opts, NFTAddr, new(big.Int).SetUint64(supply))
 }
+
+// SetNFTBaseUri Only issuer can set NFT's baseuri
+func (c *Core) SetNFTBaseUri(opts *bind.TransactOpts, NFTAddr common.Address, baseUri string) (*types.Transaction, error) {
+	return c.did.SetNFTBaseUri(opts, NFTAddr, baseUri)
+}
+
+// MintDGV1 Only issuer can airdrop the nft for dg version 1
+func (c *Core) MintDGV1(opts *bind.TransactOpts, DGAddr common.Address, tokenId *big.Int, addrs []common.Address) (*types.Transaction, error) {
+	return c.did.MintDGV1(opts, DGAddr, tokenId, addrs)
+}
+
+// MintDGV2 Only issuer can airdrop the nft for dg version 2
+func (c *Core) MintDGV2(opts *bind.TransactOpts, DGAddr common.Address, tokenId *big.Int, addrs []common.Address, data []byte) (*types.Transaction, error) {
+	return c.did.MintDGV2(opts, DGAddr, tokenId, addrs, data)
+}
+
+// ClaimDG User claim the nft
+func (c *Core) ClaimDG(opts *bind.TransactOpts, addr common.Address, tokenId *big.Int, data, evidence []byte) (*types.Transaction, error) {
+	return c.did.ClaimDG(opts, addr, tokenId, data, evidence)
+}
+
+// MintDGNFT Only issuer can airdrop the nft
+func (c *Core) MintDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid *big.Int, addrs []common.Address) (*types.Transaction, error) {
+	return c.did.MintDGNFT(opts, NFTAddr, sid, addrs)
+}
+
+// ClaimDGNFT User claim the nft
+func (c *Core) ClaimDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid *big.Int, evidence []byte) (*types.Transaction, error) {
+	return c.did.ClaimDGNFT(opts, NFTAddr, sid, evidence)
+}

@@ -1,6 +1,7 @@
 package hashkeydid_go
 
 import (
+	"github.com/ethereum/go-ethereum/core/types"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -55,4 +56,14 @@ func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId string, coinTyp
 		return []byte{}, ErrInvalidTokenId
 	}
 	return c.resolver.Addr(opts, id, big.NewInt(coinType))
+}
+
+// VerifyDIDFormat returns Verify did format
+func (c *Core) VerifyDIDFormat(opts *bind.CallOpts, did string) (bool, error) {
+	return c.did.VerifyDIDFormat(opts, did)
+}
+
+// MintDID mint did
+func (c *Core) MintDID(opts *bind.TransactOpts, to common.Address, did string) (*types.Transaction, error) {
+	return c.did.Mint(opts, to, did)
 }
