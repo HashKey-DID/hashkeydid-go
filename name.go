@@ -46,8 +46,3 @@ func (c *Core) GetDIDNameByAddrForce(opts *bind.CallOpts, address common.Address
 	}
 	return name, nil
 }
-
-// SetReverse sets the reverse status for address
-func (c *Core) SetReverse(opts *bind.TransactOpts, status bool) (*types.Transaction, error) {
-	return c.resolver.SetReverse(opts, opts.From, status)
-}
