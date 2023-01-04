@@ -5,6 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 )
 
 // GetTokenIdByDid returns DID's tokenId by name
@@ -55,4 +56,19 @@ func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId string, coinTyp
 		return []byte{}, ErrInvalidTokenId
 	}
 	return c.resolver.Addr(opts, id, big.NewInt(coinType))
+}
+
+// VerifyDIDFormat returns Verify did format
+func (c *Core) VerifyDIDFormat(opts *bind.CallOpts, did string) (bool, error) {
+	return c.did.VerifyDIDFormat(opts, did)
+}
+
+// MintDID mint did to other
+func (c *Core) MintDID(opts *bind.TransactOpts, to common.Address, did string) (*types.Transaction, error) {
+	return c.did.Mint(opts, to, did)
+}
+
+// ClaimDID mint did to self
+func (c *Core) ClaimDID(opts *bind.TransactOpts, did string) (*types.Transaction, error) {
+	return c.did.Claim(opts, did)
 }
