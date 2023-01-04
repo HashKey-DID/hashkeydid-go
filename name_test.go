@@ -48,13 +48,6 @@ func TestCore_GetDIDNameByAddrForce(t *testing.T) {
 	assert.Equal(t, "gosdktest.key", name)
 }
 
-func TestCore_SetReverse(t *testing.T) {
-	core := initTestCore()
-	opts := GetOpts("xxxx", core.client)
-	tx, _ := core.SetReverse(opts, common.Address{},false)
-	fmt.Println(tx.Hash())
-}
-
 func Test_GetDIDNameByAddrFalse(t *testing.T){
 	core := initTestCore()
 	fmt.Println(core.GetDIDNameByAddr(nil, common.HexToAddress("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c")))
@@ -76,13 +69,13 @@ func GetOpts(privateKeyStr string, client *ethclient.Client) *bind.TransactOpts 
 	return auth
 }
 
-func EstimateGas() {
+func Test_EstimateGas(t *testing.T) {
 	core := initTestCore()
 	from := common.HexToAddress("0xc6642B7980A5a702732B243b0C21655e82e80189")
 	to := common.HexToAddress("0x606729294604A1c71f4BFc001894E4f8095Ec2eF")
 	//8357cbc41663f1ff2e9767155c877a57b400d62
 	//7fdd3f96cbde51737a9e24b461e7e92a057c3bbf
-	b, _ := hex.DecodeString("0x943120d8000000000000000000000000a060c1c3807059027ca141efb63f19e12e0cbf0c0000000000000000000000000000000000000000000000000000000000000000")
+	b, _ := hex.DecodeString("0x0c1906ec00000000000000000000000000000000000000000000000000000000000035bc00000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004")
 
 	num, err := core.client.EstimateGas(context.Background(), ethereum.CallMsg{From: from, To: &to, Data: b})
 	fmt.Println(num, err)
