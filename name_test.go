@@ -59,10 +59,9 @@ func GetOpts(privateKeyStr string, client *ethclient.Client) *bind.TransactOpts 
 	chainID, _ := client.ChainID(context.Background())
 	auth, _ := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
 	gasPrice, _ := client.SuggestGasPrice(context.Background())
-	nonce, err := client.PendingNonceAt(context.Background(), auth.From)
+	nonce, _ := client.PendingNonceAt(context.Background(), auth.From)
 	auth.Nonce = big.NewInt(int64(nonce))
-	fmt.Println(chainID, gasPrice, nonce, err)
-	auth.GasPrice = big.NewInt(50000000000)
+	auth.GasPrice = gasPrice
 	auth.GasLimit = 3000000
 	// auth.GasLimit = uint64(0)
 	auth.Value = big.NewInt(0) // in wei
@@ -71,12 +70,9 @@ func GetOpts(privateKeyStr string, client *ethclient.Client) *bind.TransactOpts 
 
 func Test_EstimateGas(t *testing.T) {
 	core := initTestCore()
-	from := common.HexToAddress("0xc6642B7980A5a702732B243b0C21655e82e80189")
+	from := common.HexToAddress("0xB45c5Eac26AF321dd9C02693418976F52E1219b6")
 	to := common.HexToAddress("0x606729294604A1c71f4BFc001894E4f8095Ec2eF")
-	//8357cbc41663f1ff2e9767155c877a57b400d62
-	//7fdd3f96cbde51737a9e24b461e7e92a057c3bbf
-	b, _ := hex.DecodeString("0x0c1906ec00000000000000000000000000000000000000000000000000000000000035bc00000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004")
-
-	num, err := core.client.EstimateGas(context.Background(), ethereum.CallMsg{From: from, To: &to, Data: b})
+	b1, err := hex.DecodeString("ac8682ca0000000000000000000000000000000000000000000000000000000000000000")
+	num, err := core.client.EstimateGas(context.Background(), ethereum.CallMsg{From: from, To: &to, Data: b1})
 	fmt.Println(num, err)
 }

@@ -4,6 +4,7 @@
 package resolver
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -26,8 +28,14 @@ var (
 	_ = event.NewSubscription
 )
 
+// ContractMetaData contains all meta data concerning the Contract contract.
+var ContractMetaData = &bind.MetaData{
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"newAddress\",\"type\":\"bytes\"}],\"name\":\"AddressChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"cid\",\"type\":\"bytes\"}],\"name\":\"ContentHashChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"name\":\"PubkeyChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"string\",\"name\":\"indexedKey\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"}],\"name\":\"TextChanged\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"}],\"name\":\"addr\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"contentHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DIDAddr\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addr\",\"type\":\"address\"}],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"pubkey\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_addr\",\"type\":\"bytes\"}],\"name\":\"setAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"cid\",\"type\":\"bytes\"}],\"name\":\"setContentHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"name\":\"setPubkey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"isReverse\",\"type\":\"bool\"}],\"name\":\"setReverse\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"}],\"name\":\"setText\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"}],\"name\":\"text\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+}
+
 // ContractABI is the input ABI used to generate the binding from.
-const ContractABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"newAddress\",\"type\":\"bytes\"}],\"name\":\"AddressChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"cid\",\"type\":\"bytes\"}],\"name\":\"ContentHashChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"name\":\"PubkeyChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isReverse\",\"type\":\"bool\"}],\"name\":\"ReverseChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"}],\"name\":\"TextChanged\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"}],\"name\":\"addr\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"contentHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"DIDAddr\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addr\",\"type\":\"address\"}],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"pubkey\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coinType\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_addr\",\"type\":\"bytes\"}],\"name\":\"setAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"cid\",\"type\":\"bytes\"}],\"name\":\"setContentHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"x\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"y\",\"type\":\"bytes32\"}],\"name\":\"setPubkey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addr\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isReverse\",\"type\":\"bool\"}],\"name\":\"setReverse\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"}],\"name\":\"setText\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"}],\"name\":\"text\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
+// Deprecated: Use ContractMetaData.ABI instead.
+var ContractABI = ContractMetaData.ABI
 
 // Contract is an auto generated Go binding around an Ethereum contract.
 type Contract struct {
@@ -278,9 +286,12 @@ func (_Contract *ContractCaller) Pubkey(opts *bind.CallOpts, tokenId *big.Int) (
 		X [32]byte
 		Y [32]byte
 	})
+	if err != nil {
+		return *outstruct, err
+	}
 
-	outstruct.X = out[0].([32]byte)
-	outstruct.Y = out[1].([32]byte)
+	outstruct.X = *abi.ConvertType(out[0], new([32]byte)).(*[32]byte)
+	outstruct.Y = *abi.ConvertType(out[1], new([32]byte)).(*[32]byte)
 
 	return *outstruct, err
 
@@ -421,25 +432,25 @@ func (_Contract *ContractTransactorSession) SetPubkey(tokenId *big.Int, x [32]by
 	return _Contract.Contract.SetPubkey(&_Contract.TransactOpts, tokenId, x, y)
 }
 
-// SetReverse is a paid mutator transaction binding the contract method 0x943120d8.
+// SetReverse is a paid mutator transaction binding the contract method 0xac8682ca.
 //
-// Solidity: function setReverse(address _addr, bool isReverse) returns()
-func (_Contract *ContractTransactor) SetReverse(opts *bind.TransactOpts, _addr common.Address, isReverse bool) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "setReverse", _addr, isReverse)
+// Solidity: function setReverse(bool isReverse) returns()
+func (_Contract *ContractTransactor) SetReverse(opts *bind.TransactOpts, isReverse bool) (*types.Transaction, error) {
+	return _Contract.contract.Transact(opts, "setReverse", isReverse)
 }
 
-// SetReverse is a paid mutator transaction binding the contract method 0x943120d8.
+// SetReverse is a paid mutator transaction binding the contract method 0xac8682ca.
 //
-// Solidity: function setReverse(address _addr, bool isReverse) returns()
-func (_Contract *ContractSession) SetReverse(_addr common.Address, isReverse bool) (*types.Transaction, error) {
-	return _Contract.Contract.SetReverse(&_Contract.TransactOpts, _addr, isReverse)
+// Solidity: function setReverse(bool isReverse) returns()
+func (_Contract *ContractSession) SetReverse(isReverse bool) (*types.Transaction, error) {
+	return _Contract.Contract.SetReverse(&_Contract.TransactOpts, isReverse)
 }
 
-// SetReverse is a paid mutator transaction binding the contract method 0x943120d8.
+// SetReverse is a paid mutator transaction binding the contract method 0xac8682ca.
 //
-// Solidity: function setReverse(address _addr, bool isReverse) returns()
-func (_Contract *ContractTransactorSession) SetReverse(_addr common.Address, isReverse bool) (*types.Transaction, error) {
-	return _Contract.Contract.SetReverse(&_Contract.TransactOpts, _addr, isReverse)
+// Solidity: function setReverse(bool isReverse) returns()
+func (_Contract *ContractTransactorSession) SetReverse(isReverse bool) (*types.Transaction, error) {
+	return _Contract.Contract.SetReverse(&_Contract.TransactOpts, isReverse)
 }
 
 // SetText is a paid mutator transaction binding the contract method 0x3fb24782.
@@ -595,6 +606,7 @@ func (_Contract *ContractFilterer) ParseAddressChanged(log types.Log) (*Contract
 	if err := _Contract.contract.UnpackLog(event, "AddressChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -739,6 +751,7 @@ func (_Contract *ContractFilterer) ParseContentHashChanged(log types.Log) (*Cont
 	if err := _Contract.contract.UnpackLog(event, "ContentHashChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -872,6 +885,7 @@ func (_Contract *ContractFilterer) ParseInitialized(log types.Log) (*ContractIni
 	if err := _Contract.contract.UnpackLog(event, "Initialized", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1017,150 +1031,7 @@ func (_Contract *ContractFilterer) ParsePubkeyChanged(log types.Log) (*ContractP
 	if err := _Contract.contract.UnpackLog(event, "PubkeyChanged", log); err != nil {
 		return nil, err
 	}
-	return event, nil
-}
-
-// ContractReverseChangedIterator is returned from FilterReverseChanged and is used to iterate over the raw logs and unpacked data for ReverseChanged events raised by the Contract contract.
-type ContractReverseChangedIterator struct {
-	Event *ContractReverseChanged // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *ContractReverseChangedIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(ContractReverseChanged)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(ContractReverseChanged)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractReverseChangedIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *ContractReverseChangedIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// ContractReverseChanged represents a ReverseChanged event raised by the Contract contract.
-type ContractReverseChanged struct {
-	Addr      common.Address
-	IsReverse bool
-	Raw       types.Log // Blockchain specific contextual infos
-}
-
-// FilterReverseChanged is a free log retrieval operation binding the contract event 0x8182102840fb14a103d318c10736b4d72c565a944cce4fcb84f7d7f00b89fdf8.
-//
-// Solidity: event ReverseChanged(address indexed addr, bool isReverse)
-func (_Contract *ContractFilterer) FilterReverseChanged(opts *bind.FilterOpts, addr []common.Address) (*ContractReverseChangedIterator, error) {
-
-	var addrRule []interface{}
-	for _, addrItem := range addr {
-		addrRule = append(addrRule, addrItem)
-	}
-
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "ReverseChanged", addrRule)
-	if err != nil {
-		return nil, err
-	}
-	return &ContractReverseChangedIterator{contract: _Contract.contract, event: "ReverseChanged", logs: logs, sub: sub}, nil
-}
-
-// WatchReverseChanged is a free log subscription operation binding the contract event 0x8182102840fb14a103d318c10736b4d72c565a944cce4fcb84f7d7f00b89fdf8.
-//
-// Solidity: event ReverseChanged(address indexed addr, bool isReverse)
-func (_Contract *ContractFilterer) WatchReverseChanged(opts *bind.WatchOpts, sink chan<- *ContractReverseChanged, addr []common.Address) (event.Subscription, error) {
-
-	var addrRule []interface{}
-	for _, addrItem := range addr {
-		addrRule = append(addrRule, addrItem)
-	}
-
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "ReverseChanged", addrRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(ContractReverseChanged)
-				if err := _Contract.contract.UnpackLog(event, "ReverseChanged", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseReverseChanged is a log parse operation binding the contract event 0x8182102840fb14a103d318c10736b4d72c565a944cce4fcb84f7d7f00b89fdf8.
-//
-// Solidity: event ReverseChanged(address indexed addr, bool isReverse)
-func (_Contract *ContractFilterer) ParseReverseChanged(log types.Log) (*ContractReverseChanged, error) {
-	event := new(ContractReverseChanged)
-	if err := _Contract.contract.UnpackLog(event, "ReverseChanged", log); err != nil {
-		return nil, err
-	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1233,40 +1104,49 @@ func (it *ContractTextChangedIterator) Close() error {
 
 // ContractTextChanged represents a TextChanged event raised by the Contract contract.
 type ContractTextChanged struct {
-	TokenId *big.Int
-	Key     string
-	Value   string
-	Raw     types.Log // Blockchain specific contextual infos
+	TokenId    *big.Int
+	IndexedKey common.Hash
+	Key        string
+	Value      string
+	Raw        types.Log // Blockchain specific contextual infos
 }
 
-// FilterTextChanged is a free log retrieval operation binding the contract event 0x7121d1b42aabab02ef111a84b9dc36375a901fd0635378f23df84878362f96c7.
+// FilterTextChanged is a free log retrieval operation binding the contract event 0xe219c694b6b58e5263cea71424d10e93e7dc7f2ec3a0291aa27009084fd05a8b.
 //
-// Solidity: event TextChanged(uint256 indexed tokenId, string key, string value)
-func (_Contract *ContractFilterer) FilterTextChanged(opts *bind.FilterOpts, tokenId []*big.Int) (*ContractTextChangedIterator, error) {
+// Solidity: event TextChanged(uint256 indexed tokenId, string indexed indexedKey, string key, string value)
+func (_Contract *ContractFilterer) FilterTextChanged(opts *bind.FilterOpts, tokenId []*big.Int, indexedKey []string) (*ContractTextChangedIterator, error) {
 
 	var tokenIdRule []interface{}
 	for _, tokenIdItem := range tokenId {
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
+	var indexedKeyRule []interface{}
+	for _, indexedKeyItem := range indexedKey {
+		indexedKeyRule = append(indexedKeyRule, indexedKeyItem)
+	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "TextChanged", tokenIdRule)
+	logs, sub, err := _Contract.contract.FilterLogs(opts, "TextChanged", tokenIdRule, indexedKeyRule)
 	if err != nil {
 		return nil, err
 	}
 	return &ContractTextChangedIterator{contract: _Contract.contract, event: "TextChanged", logs: logs, sub: sub}, nil
 }
 
-// WatchTextChanged is a free log subscription operation binding the contract event 0x7121d1b42aabab02ef111a84b9dc36375a901fd0635378f23df84878362f96c7.
+// WatchTextChanged is a free log subscription operation binding the contract event 0xe219c694b6b58e5263cea71424d10e93e7dc7f2ec3a0291aa27009084fd05a8b.
 //
-// Solidity: event TextChanged(uint256 indexed tokenId, string key, string value)
-func (_Contract *ContractFilterer) WatchTextChanged(opts *bind.WatchOpts, sink chan<- *ContractTextChanged, tokenId []*big.Int) (event.Subscription, error) {
+// Solidity: event TextChanged(uint256 indexed tokenId, string indexed indexedKey, string key, string value)
+func (_Contract *ContractFilterer) WatchTextChanged(opts *bind.WatchOpts, sink chan<- *ContractTextChanged, tokenId []*big.Int, indexedKey []string) (event.Subscription, error) {
 
 	var tokenIdRule []interface{}
 	for _, tokenIdItem := range tokenId {
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
+	var indexedKeyRule []interface{}
+	for _, indexedKeyItem := range indexedKey {
+		indexedKeyRule = append(indexedKeyRule, indexedKeyItem)
+	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "TextChanged", tokenIdRule)
+	logs, sub, err := _Contract.contract.WatchLogs(opts, "TextChanged", tokenIdRule, indexedKeyRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1298,13 +1178,14 @@ func (_Contract *ContractFilterer) WatchTextChanged(opts *bind.WatchOpts, sink c
 	}), nil
 }
 
-// ParseTextChanged is a log parse operation binding the contract event 0x7121d1b42aabab02ef111a84b9dc36375a901fd0635378f23df84878362f96c7.
+// ParseTextChanged is a log parse operation binding the contract event 0xe219c694b6b58e5263cea71424d10e93e7dc7f2ec3a0291aa27009084fd05a8b.
 //
-// Solidity: event TextChanged(uint256 indexed tokenId, string key, string value)
+// Solidity: event TextChanged(uint256 indexed tokenId, string indexed indexedKey, string key, string value)
 func (_Contract *ContractFilterer) ParseTextChanged(log types.Log) (*ContractTextChanged, error) {
 	event := new(ContractTextChanged)
 	if err := _Contract.contract.UnpackLog(event, "TextChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }

@@ -9,7 +9,7 @@ import (
 
 func TestCore_AddAuth(t *testing.T){
 	core := initTestCore()
-	opt := GetOpts("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b9230581047cbc4", core.client)
+	opt := GetOpts("xxx", core.client)
 	tx, err := core.AddAuth(opt, 13756, common.HexToAddress("0xc6642B7980A5a702732B243b0C21655e82e80111"))
 	if err != nil {
 		fmt.Println(err)
@@ -19,7 +19,7 @@ func TestCore_AddAuth(t *testing.T){
 
 func TestCore_RemoveAuth(t *testing.T){
 	core := initTestCore()
-	opt := GetOpts("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b9230581047cbc4", core.client)
+	opt := GetOpts("xxx", core.client)
 	tx, err := core.RemoveAuth(opt, 13756, common.HexToAddress("0xc6642B7980A5a702732B243b0C21655e82e80111"))
 	if err != nil {
 		fmt.Println(err)

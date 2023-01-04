@@ -4,13 +4,12 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
 // SetReverse sets the reverse status for address
-func (c *Core) SetReverse(opts *bind.TransactOpts, addr common.Address, isReverse bool) (*types.Transaction, error) {
-	return c.resolver.SetReverse(opts, addr, isReverse)
+func (c *Core) SetReverse(opts *bind.TransactOpts, isReverse bool) (*types.Transaction, error) {
+	return c.resolver.SetReverse(opts, isReverse)
 }
 
 // GetAddr Check address on different chain
