@@ -29,7 +29,34 @@ func (c *Core) SetTokenSupply(opts *bind.TransactOpts, DGAddr common.Address, to
 	return c.did.SetTokenSupply(opts, DGAddr, tokenId, new(big.Int).SetUint64(supply))
 }
 
+//SetTokenBaseUri Only issuer can set token's baseuri
+func (c *Core) SetTokenBaseUri(opts *bind.TransactOpts, DGAddr common.Address, baseUri string) (*types.Transaction, error) {
+	return c.did.SetTokenBaseUri(opts, DGAddr, baseUri)
+}
+
+func (c *Core) MintDGV2(opts *bind.TransactOpts, DGAddr common.Address, tokenId uint64, addrs []common.Address, data []byte) (*types.Transaction, error) {
+	return c.did.MintDGV2(opts, DGAddr, new(big.Int).SetUint64(tokenId), addrs, data)
+}
+
+func (c *Core) ClaimDG(opts *bind.TransactOpts, DGAddr common.Address, tokenId uint64, data []byte, evidence []byte) (*types.Transaction, error) {
+	if len(evidence) != 65 {
+		return nil, ErrInvalidEvidence
+	}
+	return c.did.ClaimDG(opts, DGAddr, new(big.Int).SetUint64(tokenId), data, evidence)
+}
+
 // SetNFTSupply set NFT supply
 func (c *Core) SetNFTSupply(opts *bind.TransactOpts, NFTAddr common.Address, supply uint64) (*types.Transaction, error) {
 	return c.did.SetNFTSupply(opts, NFTAddr, new(big.Int).SetUint64(supply))
+}
+
+func (c *Core) MintDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid uint64, addrs []common.Address) (*types.Transaction, error) {
+	return c.did.MintDGNFT(opts, NFTAddr, new(big.Int).SetUint64(sid), addrs)
+}
+
+func (c *Core) ClaimDGNFT(opts *bind.TransactOpts, NFTAddr common.Address, sid uint64, evidence []byte) (*types.Transaction, error) {
+	if len(evidence) != 65 {
+		return nil, ErrInvalidEvidence
+	}
+	return c.did.ClaimDGNFT(opts, NFTAddr, new(big.Int).SetUint64(sid), evidence)
 }
