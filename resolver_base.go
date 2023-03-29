@@ -4,8 +4,14 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 )
+
+// GetDIDNameByAddr returns the did name by address when user set reverse
+func (c *Core) GetDIDNameByAddr(opts *bind.CallOpts, address common.Address) (string, error) {
+	return c.resolver.Name(opts, address)
+}
 
 // GetAddr Check address on different chain
 func (c *Core) GetAddr(opts *bind.CallOpts, tokenId *big.Int, coinType uint64) ([]byte, error) {
