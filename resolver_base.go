@@ -7,11 +7,6 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-// SetReverse sets the reverse status for address
-func (c *Core) SetReverse(opts *bind.TransactOpts, isReverse bool) (*types.Transaction, error) {
-	return c.resolver.SetReverse(opts, isReverse)
-}
-
 // GetAddr Check address on different chain
 func (c *Core) GetAddr(opts *bind.CallOpts, tokenId *big.Int, coinType uint64) ([]byte, error) {
 	return c.resolver.Addr(opts, tokenId, new(big.Int).SetUint64(coinType))

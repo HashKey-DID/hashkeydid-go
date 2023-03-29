@@ -11,6 +11,5 @@ var (
 	ErrInvalidAvatarText = fmt.Errorf("the avatar text is invalid")
 	ErrInvalidTokenURI   = fmt.Errorf("the tokenURI of avatar is invalid")
 	ErrInvalidTokenId    = fmt.Errorf("the token id is invalid")
-	ErrTimeExpired       = fmt.Errorf("the time has expired")
-	ErrInvalidEvidence   = fmt.Errorf("the evidence is invalid")
+	ErrNotSupportYet     = fmt.Errorf("the chain has not been supported yet")
 )

@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"log"
 	"math/big"
 	"testing"
 
@@ -15,14 +14,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/stretchr/testify/assert"
 )
-
-func initTestCore() *Core {
-	core, err := NewDIDCore(DefaultPlatONUrl, DefaultDIDContractAddr, DefaultDIDResolverContractAddr)
-	if err != nil {
-		log.Fatalf("init test core err: %s\n", err)
-	}
-	return core
-}
 
 func TestCore_GetDIDNameByAddr(t *testing.T) {
 	core := initTestCore()
@@ -48,7 +39,7 @@ func TestCore_GetDIDNameByAddrForce(t *testing.T) {
 	assert.Equal(t, "gosdktest.key", name)
 }
 
-func Test_GetDIDNameByAddrFalse(t *testing.T){
+func Test_GetDIDNameByAddrFalse(t *testing.T) {
 	core := initTestCore()
 	fmt.Println(core.GetDIDNameByAddr(nil, common.HexToAddress("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c")))
 	fmt.Println(core.GetDIDNameByAddrForce(nil, common.HexToAddress("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c")))

@@ -4,9 +4,10 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math/big"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -34,8 +35,8 @@ func (c *Core) GetMetadataAvatarByDIDName(opts *bind.CallOpts, didName string) (
 }
 
 // GetMetadataAvatarByTokenId returns the image url in metadata queried by tokenId
-func (c *Core) GetMetadataAvatarByTokenId(opts *bind.CallOpts, tokenId uint64) (string, error) {
-	_, err := c.did.OwnerOf(opts, new(big.Int).SetUint64(tokenId))
+func (c *Core) GetMetadataAvatarByTokenId(opts *bind.CallOpts, tokenId *big.Int) (string, error) {
+	_, err := c.did.OwnerOf(opts, tokenId)
 	if err != nil {
 		if strings.Contains(err.Error(), "invalid token ID") {
 			return "", ErrTokenIdNotMinted
@@ -46,7 +47,7 @@ func (c *Core) GetMetadataAvatarByTokenId(opts *bind.CallOpts, tokenId uint64) (
 }
 
 // GetAvatarByDIDName returns the image url in resolver text queried by did name
-func (c *Core) GetAvatarByDIDName(opts *bind.CallOpts, didName string, chainList map[string]*ChainInfo) (string, error) {
+func (c *Core) GetAvatarByDIDName(opts *bind.CallOpts, didName string, chainRpc ...*ChainRpcInfo) (string, error) {
 	didClaimed, err := c.did.DidClaimed(opts, didName)
 	if err != nil {
 		return "", err
@@ -65,30 +66,30 @@ func (c *Core) GetAvatarByDIDName(opts *bind.CallOpts, didName string, chainList
 	if avatarText == "" {
 		return "", ErrAvatarNotSet
 	}
-	return avatarFormatText2AvatarUrl(opts, avatarText, chainList)
+	return avatarFormatText2AvatarUrl(opts, avatarText, chainRpc...)
 }
 
 // GetAvatarByTokenId returns the image url in resolver text queried by tokenId
-func (c *Core) GetAvatarByTokenId(opts *bind.CallOpts, tokenId uint64, chainList map[string]*ChainInfo) (string, error) {
-	_, err := c.did.OwnerOf(opts, new(big.Int).SetUint64(tokenId))
+func (c *Core) GetAvatarByTokenId(opts *bind.CallOpts, tokenId *big.Int, chainRpc ...*ChainRpcInfo) (string, error) {
+	_, err := c.did.OwnerOf(opts, tokenId)
 	if err != nil {
 		if strings.Contains(err.Error(), "invalid token ID") {
 			return "", ErrTokenIdNotMinted
 		}
 		return "", err
 	}
-	avatarText, err := c.resolver.Text(opts, new(big.Int).SetUint64(tokenId), "avatar")
+	avatarText, err := c.resolver.Text(opts, tokenId, "avatar")
 	if err != nil {
 		return "", err
 	}
 	if avatarText == "" {
 		return "", ErrAvatarNotSet
 	}
-	return avatarFormatText2AvatarUrl(opts, avatarText, chainList)
+	return avatarFormatText2AvatarUrl(opts, avatarText, chainRpc...)
 }
 
 // avatarFormatText2AvatarUrl convert avatar format text in resolver to an image url
-func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainList map[string]*ChainInfo) (string, error) {
+func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainRpc ...*ChainRpcInfo) (string, error) {
 	texts := strings.Split(formatText, ":")
 	if len(texts) < 2 {
 		return "", ErrInvalidAvatarText
@@ -99,9 +100,16 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 		if len(texts) != 5 {
 			return "", ErrInvalidAvatarText
 		}
-		if chainList == nil {
-			chainList = ChainList
+
+		chainList := make(map[string]*ChainRpcInfo)
+		if len(chainRpc) == 0 {
+			chainList = ChainRpcMap
+		} else {
+			for _, info := range chainRpc {
+				chainList[strconv.FormatUint(info.ChainId, 10)] = info
+			}
 		}
+
 		client, err := ethclient.Dial(chainList[texts[1]].RPCUrl)
 		if err != nil {
 			return "", err
@@ -154,20 +162,19 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainLis
 
 // getImageFromTokenURI parses tokenURI's info to get the image url
 func getImageFromTokenURI(tokenURI string) string {
-	client := http.Client {
-		Transport: &http.Transport {
+	client := http.Client{
+		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
 				InsecureSkipVerify: true,
 			},
 		},
 	}
-	request, _ := http.NewRequest("GET", tokenURI, nil)
-	res, err := client.Do(request)
+	res, err := client.Get(tokenURI)
 	if err != nil {
 		return ""
 	}
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return ""
 	}
