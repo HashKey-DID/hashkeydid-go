@@ -4,7 +4,10 @@
 
 # abigen is need in your $PATH
 compile:
-		go generate contracts/did/generator.go
-		go generate contracts/erc721/generator.go
-		go generate contracts/erc1155/generator.go
-		go generate contracts/resolver/generator.go
+	go generate contracts/did/generator.go
+	go generate contracts/erc721/generator.go
+	go generate contracts/erc1155/generator.go
+	go generate contracts/resolver/generator.go
+
+test:
+	go test github.com/hashkeydid/hashkeydid-go -v
