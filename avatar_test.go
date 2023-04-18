@@ -1,7 +1,6 @@
 package hashkeydid_go
 
 import (
-	"fmt"
 	"math/big"
 	"testing"
 
@@ -35,20 +34,22 @@ func TestCore_GetMetadataAvatarByTokenId(t *testing.T) {
 
 func TestCore_GetAvatarByTokenId(t *testing.T) {
 	core := initTestCore()
-	avatarUrl1, err := core.GetAvatarByDIDName(nil, "gosdktest.key")
-	avatarUrl2, err := core.GetAvatarByTokenId(nil, big.NewInt(13756))
-	fmt.Println(avatarUrl1 == avatarUrl2)
+	avatarUrl1, err := core.GetAvatarByDIDName(nil, "herro.key")
 	assert.Nil(t, err)
+	avatarUrl2, err := core.GetAvatarByTokenId(nil, big.NewInt(13756))
+	assert.Nil(t, err)
+	assert.Equal(t, avatarUrl1, avatarUrl2)
 }
 
 func TestCore_avatarFormatText2AvatarUrl(t *testing.T) {
-	// url := "nft:1:721:0xd2ff891f5556c623f36a3f22b0e4815a3e36dc23:1"
 	url := "nft:1:721:0xdb0867214f0a2e129fbc8b72f2898851e28fb09f:1333"
-	fmt.Println(avatarFormatText2AvatarUrl(nil, url))
+	avatarUrl, err := avatarFormatText2AvatarUrl(nil, url)
+	assert.Nil(t, err)
+	assert.Equal(t, avatarUrl, "http://ipfs.io/ipfs/QmbwVE72NF8iuPnSdVent6oend3WXG7reYkA2GaaaCTEZy/1333.png")
 }
 
 func Test_getImageFromTokenURI(t *testing.T) {
-	// var proxyUrl = "http://127.0.0.1:1080"
 	var tokenUri = "https://arweave.net/i8bb1L1T82q8mu8fN6zU4V-u6F_aaxtG263JHQPLAJY/1"
-	getImageFromTokenURI(tokenUri)
+	image := getImageFromTokenURI(tokenUri)
+	assert.Equal(t, image, "https://arweave.net/kfU89BXdRGr324UAccjYzUSJKjdXejBx4HnyesOn9qM")
 }

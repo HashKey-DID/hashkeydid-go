@@ -1,7 +1,6 @@
 package hashkeydid_go
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -158,14 +157,14 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainRpc
 
 // getImageFromTokenURI parses tokenURI's info to get the image url
 func getImageFromTokenURI(tokenURI string) string {
-	client := http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-		},
-	}
-	res, err := client.Get(tokenURI)
+	//client := http.Client{
+	//	//Transport: &http.Transport{
+	//	//	TLSClientConfig: &tls.Config{
+	//	//		InsecureSkipVerify: true,
+	//	//	},
+	//	//},
+	//}
+	res, err := http.Get(tokenURI)
 	if err != nil {
 		return ""
 	}
