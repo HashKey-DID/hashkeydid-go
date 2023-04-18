@@ -1,7 +1,6 @@
 package hashkeydid_go
 
 import (
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"math/big"
 	"testing"
@@ -14,7 +13,6 @@ func Test_Base_GetTokenIdByDid(t *testing.T) {
 	tokenid, err := core.GetTokenIdByDid(nil, "gosdktest.key")
 	assert.Nil(t, err)
 	assert.Equal(t, tokenid, big.NewInt(15921))
-	fmt.Println(core.VerifyDIDFormat("sssss=.key"))
 }
 
 func Test_Base_GetDidByTokenId(t *testing.T) {
