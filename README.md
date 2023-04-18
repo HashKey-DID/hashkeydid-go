@@ -35,8 +35,6 @@ opts := &bind.CallOpts{BlockNumber: big.NewInt(40069811)}
 ```go
 // after user set reverse
 name, err := core.GetDIDNameByAddr(opts, address)
-// force
-name, err := core.GetDIDNameByAddrForce(opts, address)
 ```
 
 ### Sample2-GetAvatar

@@ -146,11 +146,7 @@ func avatarFormatText2AvatarUrl(opts *bind.CallOpts, formatText string, chainRpc
 			return "", ErrInvalidTokenURI
 		}
 		return image, nil
-	case "http":
-		fallthrough
-	case "https":
-		fallthrough
-	case "ipfs":
+	case "ipfs", "https", "http":
 		if len(texts) != 2 {
 			return "", ErrInvalidAvatarText
 		}
