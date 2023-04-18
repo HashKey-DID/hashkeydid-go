@@ -1,7 +1,6 @@
 package hashkeydid_go
 
 import (
-	"fmt"
 	"math/big"
 	"testing"
 
@@ -12,14 +11,16 @@ import (
 
 func TestCore_GetAddr(t *testing.T) {
 	core := initTestCore()
-	data, err := core.GetAddr(nil, big.NewInt(13756), 2203)
-	fmt.Println(data, string(data), err)
+	data, err := core.GetAddr(nil, big.NewInt(15921), 1)
+	assert.Nil(t, err)
+	assert.Equal(t, common.Hex2Bytes("617E266FFA5c2B168fB6B6cE1Bee9CA2E461DD58"), data)
 }
 
 func TestCore_GetText(t *testing.T) {
 	core := initTestCore()
-	name, err := core.GetText(nil, big.NewInt(13756), "name")
-	fmt.Println(name, err)
+	name, err := core.GetText(nil, big.NewInt(15921), "name")
+	assert.Nil(t, err)
+	assert.Equal(t, "gosdktest", name)
 }
 
 func TestCore_GetDIDNameByAddr(t *testing.T) {
