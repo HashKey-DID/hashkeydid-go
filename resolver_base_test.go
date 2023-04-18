@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"log"
 	"math/big"
 	"testing"
 
@@ -16,12 +15,32 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func initTestCore() *Core {
-	core, err := NewDIDCore(DefaultPlatONUrl, DefaultDIDContractAddr, DefaultDIDResolverContractAddr)
-	if err != nil {
-		log.Fatalf("init test core err: %s\n", err)
-	}
-	return core
+func TestCore_GetAddr(t *testing.T) {
+	core := initTestCore()
+	data, err := core.GetAddr(nil, big.NewInt(13756), 2203)
+	fmt.Println(data, string(data), err)
+}
+
+func TestCore_SetAddr(t *testing.T) {
+	core := initTestCore()
+	opt := GetOpts("xxx", core.client)
+	tx, err := core.SetAddr(opt, big.NewInt(13756), 2203, []byte("3QhSgXSkW6wTTN8JsAjqRtNtHGv8qwc897"))
+	fmt.Println(tx.Hash(), err)
+}
+
+func TestCore_SetText(t *testing.T) {
+	core := initTestCore()
+	opt := GetOpts("xxx", core.client)
+	tx, err := core.SetText(opt, big.NewInt(13756), "name", "咚咚咚")
+	fmt.Println(tx.Hash(), err)
+	fmt.Println(tx.Gas(), err)
+	fmt.Println(tx.GasPrice(), err)
+}
+
+func TestCore_GetText(t *testing.T) {
+	core := initTestCore()
+	name, err := core.GetText(nil, big.NewInt(13756), "name")
+	fmt.Println(name, err)
 }
 
 func TestCore_GetDIDNameByAddr(t *testing.T) {
@@ -38,20 +57,6 @@ func TestCore_GetDIDNameByAddr(t *testing.T) {
 	name, err := core.GetDIDNameByAddr(opts, common.HexToAddress("0x617E266FFA5c2B168fB6B6cE1Bee9CA2E461DD58"))
 	assert.Nil(t, err)
 	assert.Equal(t, "gosdktest.key", name)
-}
-
-func TestCore_GetDIDNameByAddrForce(t *testing.T) {
-	core := initTestCore()
-	opts := &bind.CallOpts{BlockNumber: new(big.Int).SetUint64(40069812)}
-	name, err := core.GetDIDNameByAddrForce(opts, common.HexToAddress("0x617E266FFA5c2B168fB6B6cE1Bee9CA2E461DD58"))
-	assert.Nil(t, err)
-	assert.Equal(t, "gosdktest.key", name)
-}
-
-func Test_GetDIDNameByAddrFalse(t *testing.T){
-	core := initTestCore()
-	fmt.Println(core.GetDIDNameByAddr(nil, common.HexToAddress("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c")))
-	fmt.Println(core.GetDIDNameByAddrForce(nil, common.HexToAddress("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c")))
 }
 
 func GetOpts(privateKeyStr string, client *ethclient.Client) *bind.TransactOpts {

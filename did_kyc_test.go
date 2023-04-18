@@ -11,10 +11,10 @@ import (
 
 func Test_GetKYCInfo(t *testing.T) {
 	core := initTestCore()
-	var tokenId uint64 = 5405
-	var KYCId uint64 = 3
+	tokenId := big.NewInt(5405)
+	KYCId := big.NewInt(3)
 	opts := &bind.CallOpts{BlockNumber: new(big.Int).SetUint64(41591302)}
 	name, err := core.GetKYCInfo(opts, tokenId, common.HexToAddress("0x0FC1021d0B7111f2170d1183367AAcaC26c68888"), KYCId)
 	assert.Nil(t, err)
-	assert.Equal(t, &KYCInfo{Status: true, UpdateTime: new(big.Int).SetUint64(1641325440), ExpireTime: new(big.Int).SetUint64(1704397440)}, name)
+	assert.Equal(t, &KYCInfo{Status: true, UpdateTime: 1641325440, ExpireTime: 1704397440}, name)
 }

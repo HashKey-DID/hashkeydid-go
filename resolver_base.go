@@ -4,12 +4,13 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-// SetReverse sets the reverse status for address
-func (c *Core) SetReverse(opts *bind.TransactOpts, isReverse bool) (*types.Transaction, error) {
-	return c.resolver.SetReverse(opts, isReverse)
+// GetDIDNameByAddr returns the did name by address when user set reverse
+func (c *Core) GetDIDNameByAddr(opts *bind.CallOpts, address common.Address) (string, error) {
+	return c.resolver.Name(opts, address)
 }
 
 // GetAddr Check address on different chain
