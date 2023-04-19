@@ -47,6 +47,6 @@ func (c *Core) GetBlockChainAddress(opts *bind.CallOpts, tokenId *big.Int, coinT
 }
 
 // VerifyDIDFormat returns Verify did format
-func (c *Core) VerifyDIDFormat(opts *bind.CallOpts, did string) (bool, error) {
-	return c.did.VerifyDIDFormat(opts, did)
+func (c *Core) VerifyDIDFormat(did string) (bool, error) {
+	return c.did.VerifyDIDFormat(nil, did)
 }
